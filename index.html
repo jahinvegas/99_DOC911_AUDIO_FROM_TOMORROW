@@ -1,0 +1,539 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JAHINVEGAS | Squeaky G</title>
+  <style>
+    :root {
+      --bg-0: #05060f;
+      --bg-1: #11132a;
+      --primary: #65f0ff;
+      --secondary: #be7bff;
+      --accent: #62ffcf;
+      --text: #f6f8ff;
+      --muted: #bac2e8;
+      --glass: rgba(255, 255, 255, 0.08);
+      --glass-stroke: rgba(255, 255, 255, 0.18);
+      --shadow: 0 12px 40px rgba(62, 26, 133, 0.35);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100%;
+      font-family: Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at 15% 20%, #1f2558 0%, transparent 36%),
+                  radial-gradient(circle at 80% 15%, #4a1b72 0%, transparent 36%),
+                  radial-gradient(circle at 40% 85%, #0f7f98 0%, transparent 30%),
+                  linear-gradient(140deg, var(--bg-0) 0%, var(--bg-1) 100%);
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: -100px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.22;
+      background: conic-gradient(from 180deg at 50% 50%, transparent, #7f58ff, transparent, #3cd5ff, transparent);
+      animation: spin 18s linear infinite;
+    }
+
+    body::after {
+      animation-direction: reverse;
+      animation-duration: 26s;
+      filter: blur(40px);
+      opacity: 0.14;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 rgba(101, 240, 255, 0.1), 0 0 32px rgba(190, 123, 255, 0.14); }
+      50% { box-shadow: 0 0 0 rgba(101, 240, 255, 0.25), 0 0 52px rgba(190, 123, 255, 0.28); }
+    }
+
+    @keyframes pageIn {
+      from {
+        opacity: 0;
+        transform: translateY(26px) scale(0.99);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .site-wrap {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 1;
+    }
+
+    .top-bar,
+    .footer {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: linear-gradient(120deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04));
+      border-bottom: 1px solid var(--glass-stroke);
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding: 14px clamp(16px, 4vw, 42px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      font-size: clamp(0.9rem, 2vw, 1.08rem);
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .nav-btn {
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.07);
+      color: var(--text);
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      transition: 0.25s ease;
+      cursor: pointer;
+    }
+
+    .nav-btn:hover,
+    .nav-btn.active {
+      border-color: rgba(101,240,255,0.7);
+      color: #ffffff;
+      background: linear-gradient(100deg, rgba(101,240,255,0.22), rgba(190,123,255,0.26));
+      transform: translateY(-1px);
+    }
+
+    main {
+      width: min(1180px, 92vw);
+      margin: 28px auto 36px;
+      flex: 1;
+    }
+
+    .page {
+      display: none;
+      animation: pageIn 0.5s ease both;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .glass-card {
+      border: 1px solid var(--glass-stroke);
+      background: linear-gradient(120deg, rgba(255,255,255,0.13), rgba(255,255,255,0.04));
+      backdrop-filter: blur(9px);
+      -webkit-backdrop-filter: blur(9px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 3.5vw, 36px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 7vw, 4rem);
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      text-shadow: 0 0 22px rgba(101,240,255,0.35);
+    }
+
+    .hero h1 span {
+      display: block;
+      background: linear-gradient(120deg, #fefefe, var(--primary) 40%, var(--secondary) 75%, var(--accent));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 60ch;
+      margin: 14px 0 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cta {
+      border: none;
+      border-radius: 999px;
+      padding: 11px 18px;
+      color: #fff;
+      background: linear-gradient(100deg, #4de4ff, #ab7fff, #4bffce);
+      background-size: 180% 180%;
+      animation: pulseGlow 3s ease-in-out infinite;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cta.secondary {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.22);
+      animation: none;
+    }
+
+    .hero-visual {
+      min-height: 280px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(107, 244, 255, 0.75), transparent 45%),
+        radial-gradient(circle at 70% 65%, rgba(201, 123, 255, 0.6), transparent 45%),
+        linear-gradient(140deg, rgba(255,255,255,0.14), rgba(255,255,255,0.02));
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .hero-visual::before {
+      content: "SQUEAKY G";
+      letter-spacing: 3px;
+      font-weight: 800;
+      font-size: clamp(1rem, 4vw, 1.7rem);
+      text-shadow: 0 0 22px rgba(255,255,255,0.4);
+    }
+
+    .stats {
+      margin-top: 22px;
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(3, minmax(120px, 1fr));
+    }
+
+    .stat {
+      text-align: center;
+      border-radius: 16px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+      color: var(--primary);
+    }
+
+    .playlist-page h2 {
+      margin-bottom: 10px;
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+    }
+
+    .playlist-page p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .player-shell {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: #000;
+      box-shadow: 0 10px 34px rgba(0,0,0,0.35);
+    }
+
+    .player-shell iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: none;
+      display: block;
+    }
+
+    .playlist-meta {
+      margin-top: 14px;
+      font-size: 0.9rem;
+      color: #d5dbff;
+      word-break: break-word;
+      opacity: 0.9;
+    }
+
+    .footer {
+      margin-top: auto;
+      position: static;
+      border-top: 1px solid var(--glass-stroke);
+      border-bottom: none;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(120px, 1fr));
+      }
+
+      .top-bar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-btn {
+        font-size: 0.78rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-wrap">
+    <header class="top-bar">
+      <div class="brand">JAHINVEGAS</div>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation"></nav>
+    </header>
+
+    <main id="app"></main>
+
+    <footer class="footer">
+      <span class="brand">JAHINVEGAS</span>
+      <span>Future Sound Architecture • Artist Portal for Squeaky G</span>
+    </footer>
+  </div>
+
+  <script>
+    /*
+      ==========================================
+      EASY CONFIG SECTION (ADD NEW PLAYLIST PAGES HERE)
+      ==========================================
+
+      How to add a new playlist page:
+      1) Copy one object in `playlistPages`.
+      2) Change: id, title, description, playlistUrl.
+      3) Save file. The navigation + page + embed are auto-generated.
+
+      playlistUrl should be a normal YouTube playlist URL, for example:
+      https://www.youtube.com/playlist?list=PLxxxxxxxxxxxxxxxx
+    */
+    const siteConfig = {
+      artistName: "Squeaky G",
+      playlistPages: [
+        {
+          id: "playlist-cyber-sets",
+          title: "Cyber Sets",
+          description: "High-voltage sonic sessions from the neon underground.",
+          playlistUrl: "https://www.youtube.com/playlist?list=PL4fGSI1pDJn5Wf6i5w4a5nD6n2YGfG1uL"
+        },
+        {
+          id: "playlist-neon-frequencies",
+          title: "Neon Frequencies",
+          description: "Future wave cuts and skyline anthems in one stream.",
+          playlistUrl: "https://www.youtube.com/playlist?list=PL590L5WQmH8fJ54F0nL5Pqj8A5wXjQ8qv"
+        },
+        {
+          id: "playlist-orbit-visions",
+          title: "Orbit Visions",
+          description: "Atmospheric mixes built for midnight hyperdrives.",
+          playlistUrl: "https://www.youtube.com/playlist?list=PLmXxqSJJq-yXRYA4T8f9P4A9I3b9W-99l"
+        }
+      ]
+    };
+
+    const app = document.getElementById("app");
+    const navLinks = document.getElementById("navLinks");
+
+    function getPlaylistId(url) {
+      try {
+        const parsed = new URL(url);
+        return parsed.searchParams.get("list") || "";
+      } catch (error) {
+        return "";
+      }
+    }
+
+    function getEmbedUrl(playlistUrl) {
+      const listId = getPlaylistId(playlistUrl);
+      if (!listId) return "";
+      return `https://www.youtube.com/embed/videoseries?list=${encodeURIComponent(listId)}`;
+    }
+
+    function buildPages() {
+      const pages = [];
+
+      pages.push({
+        id: "home",
+        navLabel: "Home",
+        html: `
+          <section class="page active" data-page="home">
+            <div class="glass-card hero">
+              <div>
+                <h1>
+                  <span>${siteConfig.artistName}</span>
+                  Audio From Tomorrow
+                </h1>
+                <p>
+                  Welcome to the digital stage of <strong>${siteConfig.artistName}</strong> — where cosmic basslines,
+                  glitch melodies, and out-of-this-world visuals merge into one immersive portal.
+                  Navigate through curated YouTube playlist hubs and expand this universe as new drops arrive.
+                </p>
+                <div class="hero-actions">
+                  <a href="#${siteConfig.playlistPages[0]?.id || "home"}" class="cta">Launch Playlist Stream</a>
+                  <a href="#about" class="cta secondary">About The Signal</a>
+                </div>
+                <div class="stats">
+                  <div class="stat"><strong>∞</strong>Future Vibes</div>
+                  <div class="stat"><strong>24/7</strong>Stream Ready</div>
+                  <div class="stat"><strong>100%</strong>Neon Energy</div>
+                </div>
+              </div>
+              <div class="hero-visual" aria-hidden="true"></div>
+            </div>
+          </section>
+        `
+      });
+
+      pages.push({
+        id: "about",
+        navLabel: "About",
+        html: `
+          <section class="page" data-page="about">
+            <div class="glass-card">
+              <h2>About ${siteConfig.artistName}</h2>
+              <p>
+                ${siteConfig.artistName} is a sonic architect blending high-energy rhythm patterns,
+                futuristic textures, and melodic motion into a signature style designed for massive
+                systems and night-drive headphones alike.
+              </p>
+              <p>
+                This portal is powered by <strong>JAHINVEGAS</strong> and built as a single-file SPA,
+                making it ultra-portable, easy to edit, and ready for rapid playlist expansion.
+              </p>
+            </div>
+          </section>
+        `
+      });
+
+      siteConfig.playlistPages.forEach((playlist) => {
+        const safeId = playlist.id;
+        const embedUrl = getEmbedUrl(playlist.playlistUrl);
+
+        pages.push({
+          id: safeId,
+          navLabel: playlist.title,
+          html: `
+            <section class="page playlist-page" data-page="${safeId}">
+              <div class="glass-card">
+                <h2>${playlist.title}</h2>
+                <p>${playlist.description}</p>
+                <div class="player-shell">
+                  ${embedUrl
+                    ? `<iframe
+                        loading="lazy"
+                        src="${embedUrl}"
+                        title="${playlist.title} YouTube Playlist"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                      ></iframe>`
+                    : `<div style="padding: 28px; color: #fff;">Invalid playlist URL. Please check the configuration object.</div>`
+                  }
+                </div>
+                <div class="playlist-meta">
+                  Source URL: ${playlist.playlistUrl}
+                </div>
+              </div>
+            </section>
+          `
+        });
+      });
+
+      return pages;
+    }
+
+    const pages = buildPages();
+
+    function render() {
+      navLinks.innerHTML = pages
+        .map((page) => `<a href="#${page.id}" class="nav-btn" data-link="${page.id}">${page.navLabel}</a>`)
+        .join("");
+
+      app.innerHTML = pages.map((page) => page.html).join("");
+    }
+
+    function setActivePage() {
+      const hash = window.location.hash.replace("#", "");
+      const nextPage = pages.find((page) => page.id === hash) ? hash : "home";
+
+      document.querySelectorAll(".page").forEach((pageEl) => {
+        pageEl.classList.toggle("active", pageEl.dataset.page === nextPage);
+      });
+
+      document.querySelectorAll(".nav-btn").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.link === nextPage);
+      });
+    }
+
+    render();
+    setActivePage();
+
+    window.addEventListener("hashchange", setActivePage);
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a08ce8495c0ccba0',t:'MTc4MDk3NDI1MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
