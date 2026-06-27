@@ -116,6 +116,37 @@
       color: transparent;
     }
 
+    .top-bar-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .active-signal {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .active-signal::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 14px rgba(98, 255, 207, 0.65);
+      flex: 0 0 auto;
+    }
+
     .nav-links {
       display: flex;
       flex-wrap: wrap;
@@ -141,6 +172,26 @@
       color: #ffffff;
       background: linear-gradient(100deg, rgba(101,240,255,0.22), rgba(190,123,255,0.26));
       transform: translateY(-1px);
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -56px;
+      z-index: 50;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: linear-gradient(100deg, #4de4ff, #ab7fff, #4bffce);
+      color: #05060f;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.28);
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus,
+    .skip-link:focus-visible {
+      top: 16px;
     }
 
     main {
@@ -226,6 +277,15 @@
       animation: none;
     }
 
+    .nav-btn:focus-visible,
+    .cta:focus-visible,
+    .playlist-meta a:focus-visible,
+    .skip-link:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 3px;
+      box-shadow: 0 0 0 4px rgba(101, 240, 255, 0.2);
+    }
+
     .hero-visual {
       min-height: 280px;
       border-radius: 22px;
@@ -271,6 +331,140 @@
       color: var(--primary);
     }
 
+    .home-stack {
+      display: grid;
+      gap: 24px;
+    }
+
+    .featured-playlist {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .featured-kicker {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .featured-playlist h2 {
+      font-size: clamp(1.5rem, 3.6vw, 2.3rem);
+      margin-bottom: 10px;
+    }
+
+    .featured-playlist p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .featured-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .featured-panel {
+      min-height: 220px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background:
+        radial-gradient(circle at 25% 25%, rgba(101, 240, 255, 0.3), transparent 34%),
+        radial-gradient(circle at 75% 70%, rgba(190, 123, 255, 0.28), transparent 36%),
+        linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 24px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.22);
+    }
+
+    .featured-panel strong {
+      display: block;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      margin-bottom: 8px;
+      color: var(--primary);
+      text-shadow: 0 0 18px rgba(101,240,255,0.2);
+    }
+
+    .featured-panel span {
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 24ch;
+    }
+
+    .section-lead {
+      color: var(--muted);
+      margin-top: 10px;
+      margin-bottom: 18px;
+      line-height: 1.65;
+    }
+
+    .playlist-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .playlist-empty-state {
+      padding: 24px;
+      border-radius: 18px;
+      border: 1px dashed rgba(255,255,255,0.24);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .playlist-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 220px;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: linear-gradient(160deg, rgba(255,255,255,0.09), rgba(255,255,255,0.04));
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    .playlist-card-kicker {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .playlist-card h3 {
+      font-size: 1.2rem;
+    }
+
+    .playlist-card p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+      flex: 1;
+    }
+
+    .playlist-card-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+
+    .playlist-card-actions .cta,
+    .playlist-card-actions .cta.secondary {
+      min-width: 140px;
+    }
+
     .playlist-page h2 {
       margin-bottom: 10px;
       font-size: clamp(1.4rem, 3.5vw, 2rem);
@@ -289,11 +483,41 @@
       box-shadow: 0 10px 34px rgba(0,0,0,0.35);
     }
 
-    .player-shell iframe {
+    .player-shell iframe,
+    .player-placeholder {
       width: 100%;
       aspect-ratio: 16 / 9;
       border: none;
       display: block;
+    }
+
+    .player-placeholder {
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(101, 240, 255, 0.18), transparent 35%),
+        radial-gradient(circle at 70% 60%, rgba(190, 123, 255, 0.16), transparent 38%),
+        linear-gradient(140deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    }
+
+    .player-placeholder-copy {
+      text-align: center;
+      max-width: 34ch;
+      color: var(--text);
+    }
+
+    .player-placeholder-copy strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+
+    .player-placeholder-copy span {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
     }
 
     .playlist-meta {
@@ -302,6 +526,33 @@
       color: #d5dbff;
       word-break: break-word;
       opacity: 0.9;
+    }
+
+    .playlist-meta a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .playlist-meta a:hover {
+      text-decoration: underline;
+    }
+
+    .playlist-actions {
+      margin-top: 16px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .playlist-actions .cta {
+      min-width: 210px;
+    }
+
+    .playlist-feedback {
+      margin-top: 10px;
+      min-height: 1.2em;
+      font-size: 0.9rem;
+      color: var(--accent);
     }
 
     .footer {
@@ -314,7 +565,8 @@
     }
 
     @media (max-width: 860px) {
-      .hero {
+      .hero,
+      .featured-playlist {
         grid-template-columns: 1fr;
       }
 
@@ -342,16 +594,39 @@
         font-size: 0.78rem;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      body::before,
+      body::after,
+      .hero-visual,
+      .cta,
+      .page {
+        animation: none !important;
+      }
+    }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#app">Skip to content</a>
   <div class="site-wrap">
     <header class="top-bar">
-      <div class="brand">JAHINVEGAS</div>
+      <div class="top-bar-group">
+        <div class="brand">JAHINVEGAS</div>
+        <div class="active-signal" id="activeSignal" aria-live="polite">Viewing • Home</div>
+      </div>
       <nav class="nav-links" id="navLinks" aria-label="Main navigation"></nav>
     </header>
 
-    <main id="app"></main>
+    <main id="app" tabindex="-1"></main>
 
     <footer class="footer">
       <span class="brand">JAHINVEGAS</span>
@@ -377,28 +652,32 @@
       artistName: "Squeaky G",
       playlistPages: [
         {
-          id: "playlist-cyber-sets",
-          title: "Cyber Sets",
-          description: "High-voltage sonic sessions from the neon underground.",
-          playlistUrl: "https://www.youtube.com/playlist?list=PL4fGSI1pDJn5Wf6i5w4a5nD6n2YGfG1uL"
-        },
-        {
-          id: "playlist-neon-frequencies",
-          title: "Neon Frequencies",
-          description: "Future wave cuts and skyline anthems in one stream.",
-          playlistUrl: "https://www.youtube.com/playlist?list=PL590L5WQmH8fJ54F0nL5Pqj8A5wXjQ8qv"
-        },
-        {
           id: "playlist-orbit-visions",
           title: "Orbit Visions",
           description: "Atmospheric mixes built for midnight hyperdrives.",
-          playlistUrl: "https://www.youtube.com/playlist?list=PLmXxqSJJq-yXRYA4T8f9P4A9I3b9W-99l"
+          playlistUrl: "https://www.youtube.com/playlist?list=PLrYD4SJlktuI4tGQhxHrNth5-WoLwIHcT"
+        },
+        {
+          id: "playlist-neon-freq",
+          title: "Neon Freq",
+          description: "Future wave cuts and skyline anthems in one stream.",
+          playlistUrl: "https://www.youtube.com/playlist?list=PLrYD4SJlktuKbJjaDubma4fQDjUL-wUAR"
+        },
+        {
+          id: "playlist-cyber",
+          title: "cyber",
+          description: "High-voltage sonic sessions from the neon underground.",
+          playlistUrl: "https://www.youtube.com/playlist?list=PLrYD4SJlktuJjVzqM_TXWbZ_GPHS3kJKf"
         }
       ]
     };
 
     const app = document.getElementById("app");
     const navLinks = document.getElementById("navLinks");
+    const activeSignal = document.getElementById("activeSignal");
+    const documentTitleBase = "JAHINVEGAS";
+    const lastPlaylistStorageKey = "jahinvegas:last-playlist-page";
+    let currentPageId = "";
 
     function getPlaylistId(url) {
       try {
@@ -415,36 +694,296 @@
       return `https://www.youtube.com/embed/videoseries?list=${encodeURIComponent(listId)}`;
     }
 
+    function validatePlaylistPages(playlistPages) {
+      const pagesToValidate = Array.isArray(playlistPages) ? playlistPages : [];
+      const seenIds = new Set();
+      const warnings = [];
+
+      const validPages = pagesToValidate.reduce((validList, playlist, index) => {
+        const label = `playlistPages[${index}]`;
+
+        if (!playlist || typeof playlist !== "object") {
+          warnings.push(`${label} was skipped because it is not a valid object.`);
+          return validList;
+        }
+
+        const normalizedPlaylist = {
+          id: typeof playlist.id === "string" ? playlist.id.trim() : "",
+          title: typeof playlist.title === "string" ? playlist.title.trim() : "",
+          description: typeof playlist.description === "string" && playlist.description.trim()
+            ? playlist.description.trim()
+            : "Playlist stream ready to launch.",
+          playlistUrl: typeof playlist.playlistUrl === "string" ? playlist.playlistUrl.trim() : ""
+        };
+
+        if (!normalizedPlaylist.id) {
+          warnings.push(`${label} was skipped because it is missing a valid id.`);
+          return validList;
+        }
+
+        if (seenIds.has(normalizedPlaylist.id)) {
+          warnings.push(`${label} was skipped because the id "${normalizedPlaylist.id}" is duplicated.`);
+          return validList;
+        }
+
+        if (!normalizedPlaylist.title) {
+          warnings.push(`${label} was skipped because it is missing a valid title.`);
+          return validList;
+        }
+
+        if (!normalizedPlaylist.playlistUrl) {
+          warnings.push(`${label} was skipped because it is missing a playlistUrl.`);
+          return validList;
+        }
+
+        if (!getPlaylistId(normalizedPlaylist.playlistUrl)) {
+          warnings.push(`${label} was skipped because playlistUrl does not contain a valid YouTube list id.`);
+          return validList;
+        }
+
+        seenIds.add(normalizedPlaylist.id);
+        validList.push(normalizedPlaylist);
+        return validList;
+      }, []);
+
+      return {
+        validPages,
+        warnings
+      };
+    }
+
+    const validationResult = validatePlaylistPages(siteConfig.playlistPages);
+    const configWarnings = validationResult.warnings;
+    siteConfig.playlistPages = validationResult.validPages;
+    const playlistPageIds = new Set(siteConfig.playlistPages.map((playlist) => playlist.id));
+
+    if (configWarnings.length) {
+      console.warn("Playlist config validation warnings:", configWarnings);
+    }
+
+    function getPlayerPlaceholderMarkup(title) {
+      return `
+        <div class="player-placeholder" data-player-placeholder>
+          <div class="player-placeholder-copy">
+            <strong>${title}</strong>
+            <span>Player loads when this playlist page is active for faster performance.</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function createPlaylistIframe(embedUrl, title) {
+      const iframe = document.createElement("iframe");
+      iframe.loading = "lazy";
+      iframe.src = embedUrl;
+      iframe.title = `${title} YouTube Playlist`;
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.allowFullscreen = true;
+      return iframe;
+    }
+
+    function syncActivePlaylistPlayer(activePageId) {
+      document.querySelectorAll(".player-shell[data-page-id]").forEach((shell) => {
+        const embedUrl = shell.dataset.embedUrl;
+        const title = shell.dataset.playlistTitle || "Playlist";
+        const isActiveShell = shell.dataset.pageId === activePageId;
+        const existingIframe = shell.querySelector("iframe");
+
+        if (!embedUrl) return;
+
+        if (isActiveShell) {
+          if (!existingIframe) {
+            shell.innerHTML = "";
+            shell.appendChild(createPlaylistIframe(embedUrl, title));
+          }
+        } else if (existingIframe) {
+          shell.innerHTML = getPlayerPlaceholderMarkup(title);
+        }
+      });
+    }
+
+    function getStoredPlaylistPage() {
+      try {
+        const storedPage = window.localStorage.getItem(lastPlaylistStorageKey) || "";
+        return playlistPageIds.has(storedPage) ? storedPage : "";
+      } catch (error) {
+        return "";
+      }
+    }
+
+    function rememberPlaylistPage(pageId) {
+      if (!playlistPageIds.has(pageId)) return;
+
+      try {
+        window.localStorage.setItem(lastPlaylistStorageKey, pageId);
+      } catch (error) {
+        // Ignore storage failures (private mode / browser restrictions).
+      }
+    }
+
+    function getPlaylistPageUrl(pageId) {
+      const shareUrl = new URL(window.location.href);
+      shareUrl.hash = pageId;
+      return shareUrl.toString();
+    }
+
+    function setPlaylistFeedback(pageId, message) {
+      const feedbackEl = document.querySelector(`[data-share-feedback="${pageId}"]`);
+      if (!feedbackEl) return;
+      feedbackEl.textContent = message;
+
+      if (feedbackEl._clearTimer) {
+        window.clearTimeout(feedbackEl._clearTimer);
+      }
+
+      if (message) {
+        feedbackEl._clearTimer = window.setTimeout(() => {
+          feedbackEl.textContent = "";
+        }, 2600);
+      }
+    }
+
+    function scrollToTopOnPageChange(nextPageId) {
+      const isFirstRender = !currentPageId;
+      const isNewPage = currentPageId && currentPageId !== nextPageId;
+
+      if (!isFirstRender && !isNewPage) return;
+      if (isFirstRender) return;
+
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReducedMotion ? "auto" : "smooth"
+      });
+    }
+
+    function updateActiveSignal(activePage) {
+      if (!activeSignal || !activePage) return;
+
+      const signalPrefix = playlistPageIds.has(activePage.id)
+        ? "Active Playlist"
+        : "Viewing";
+
+      activeSignal.textContent = `${signalPrefix} • ${activePage.navLabel}`;
+    }
+
+    async function sharePlaylistPage(pageId, title) {
+      const shareUrl = getPlaylistPageUrl(pageId);
+      const shareData = {
+        title: `${documentTitleBase} | ${title}`,
+        text: `Listen to ${title} on ${documentTitleBase}`,
+        url: shareUrl
+      };
+
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          setPlaylistFeedback(pageId, "Playlist link shared.");
+          return;
+        } catch (error) {
+          if (error && error.name === "AbortError") {
+            setPlaylistFeedback(pageId, "");
+            return;
+          }
+        }
+      }
+
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        setPlaylistFeedback(pageId, "Playlist link copied to clipboard.");
+        return;
+      } catch (error) {
+        window.prompt("Copy this playlist link:", shareUrl);
+        setPlaylistFeedback(pageId, "Copy dialog opened for this playlist link.");
+      }
+    }
+
     function buildPages() {
       const pages = [];
+      const featuredPlaylist = siteConfig.playlistPages[0] || null;
 
       pages.push({
         id: "home",
         navLabel: "Home",
         html: `
           <section class="page active" data-page="home">
-            <div class="glass-card hero">
-              <div>
-                <h1>
-                  <span>${siteConfig.artistName}</span>
-                  Audio From Tomorrow
-                </h1>
-                <p>
-                  Welcome to the digital stage of <strong>${siteConfig.artistName}</strong> — where cosmic basslines,
-                  glitch melodies, and out-of-this-world visuals merge into one immersive portal.
-                  Navigate through curated YouTube playlist hubs and expand this universe as new drops arrive.
-                </p>
-                <div class="hero-actions">
-                  <a href="#${siteConfig.playlistPages[0]?.id || "home"}" class="cta">Launch Playlist Stream</a>
-                  <a href="#about" class="cta secondary">About The Signal</a>
+            <div class="home-stack">
+              <div class="glass-card hero">
+                <div>
+                  <h1>
+                    <span>${siteConfig.artistName}</span>
+                    Audio From Tomorrow
+                  </h1>
+                  <p>
+                    Welcome to the digital stage of <strong>${siteConfig.artistName}</strong> — where cosmic basslines,
+                    glitch melodies, and out-of-this-world visuals merge into one immersive portal.
+                    Navigate through curated YouTube playlist hubs and expand this universe as new drops arrive.
+                  </p>
+                  <div class="hero-actions">
+                    <a href="#${siteConfig.playlistPages[0]?.id || "home"}" class="cta">Launch Playlist Stream</a>
+                    <a href="#about" class="cta secondary">About The Signal</a>
+                  </div>
+                  <div class="stats">
+                    <div class="stat"><strong>∞</strong>Future Vibes</div>
+                    <div class="stat"><strong>24/7</strong>Stream Ready</div>
+                    <div class="stat"><strong>100%</strong>Neon Energy</div>
+                  </div>
                 </div>
-                <div class="stats">
-                  <div class="stat"><strong>∞</strong>Future Vibes</div>
-                  <div class="stat"><strong>24/7</strong>Stream Ready</div>
-                  <div class="stat"><strong>100%</strong>Neon Energy</div>
+                <div class="hero-visual" aria-hidden="true"></div>
+              </div>
+
+              ${featuredPlaylist
+                ? `
+                    <div class="glass-card featured-playlist">
+                      <div>
+                        <span class="featured-kicker">Featured Transmission</span>
+                        <h2>${featuredPlaylist.title}</h2>
+                        <p>
+                          ${featuredPlaylist.description} Start here for the current highlighted channel and jump straight into the latest signal path.
+                        </p>
+                        <div class="featured-actions">
+                          <a href="#${featuredPlaylist.id}" class="cta">Open Featured Playlist</a>
+                          <a href="${featuredPlaylist.playlistUrl}" class="cta secondary" target="_blank" rel="noopener noreferrer">View on YouTube</a>
+                        </div>
+                      </div>
+                      <div class="featured-panel" aria-hidden="true">
+                        <div>
+                          <strong>${featuredPlaylist.title}</strong>
+                          <span>Primary launch channel for the Audio From Tomorrow portal.</span>
+                        </div>
+                      </div>
+                    </div>
+                  `
+                : `
+                    <div class="glass-card">
+                      <h2>Featured Transmission</h2>
+                      <div class="playlist-empty-state">No featured playlist is available yet. Add a valid playlist in the config section to spotlight it here.</div>
+                    </div>
+                  `
+              }
+
+              <div class="glass-card">
+                <h2>Playlist Channels</h2>
+                <p class="section-lead">
+                  Jump directly into each signal stream and move between the latest curated playlist worlds.
+                </p>
+                <div class="playlist-grid">
+                  ${siteConfig.playlistPages.length
+                    ? siteConfig.playlistPages.map((playlist, index) => `
+                        <article class="playlist-card">
+                          <span class="playlist-card-kicker">Playlist ${(index + 1).toString().padStart(2, "0")}</span>
+                          <h3>${playlist.title}</h3>
+                          <p>${playlist.description}</p>
+                          <div class="playlist-card-actions">
+                            <a href="#${playlist.id}" class="cta">Open Playlist</a>
+                            <a href="${playlist.playlistUrl}" class="cta secondary" target="_blank" rel="noopener noreferrer">YouTube</a>
+                          </div>
+                        </article>
+                      `).join("")
+                    : `<div class="playlist-empty-state">No valid playlists are configured yet. Add a YouTube playlist URL with a valid <code>?list=</code> value in the config section to publish a new channel.</div>`
+                  }
                 </div>
               </div>
-              <div class="hero-visual" aria-hidden="true"></div>
             </div>
           </section>
         `
@@ -483,21 +1022,47 @@
               <div class="glass-card">
                 <h2>${playlist.title}</h2>
                 <p>${playlist.description}</p>
-                <div class="player-shell">
+                <div
+                  class="player-shell"
+                  data-page-id="${safeId}"
+                  data-embed-url="${embedUrl}"
+                  data-playlist-title="${playlist.title}"
+                >
                   ${embedUrl
-                    ? `<iframe
-                        loading="lazy"
-                        src="${embedUrl}"
-                        title="${playlist.title} YouTube Playlist"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen
-                      ></iframe>`
+                    ? `<div class="player-placeholder" data-player-placeholder>
+                        <div class="player-placeholder-copy">
+                          <strong>${playlist.title}</strong>
+                          <span>Player loads when this playlist page is active for faster performance.</span>
+                        </div>
+                      </div>`
                     : `<div style="padding: 28px; color: #fff;">Invalid playlist URL. Please check the configuration object.</div>`
                   }
                 </div>
                 <div class="playlist-meta">
-                  Source URL: ${playlist.playlistUrl}
+                  Source URL:
+                  <a href="${playlist.playlistUrl}" target="_blank" rel="noopener noreferrer">${playlist.playlistUrl}</a>
                 </div>
+                <div class="playlist-actions">
+                  <button
+                    type="button"
+                    class="cta"
+                    data-share-playlist="${safeId}"
+                    data-share-title="${playlist.title}"
+                    aria-label="Share ${playlist.title} playlist page"
+                  >
+                    Share Playlist
+                  </button>
+                  <a
+                    href="${playlist.playlistUrl}"
+                    class="cta secondary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Open ${playlist.title} on YouTube"
+                  >
+                    Open on YouTube
+                  </a>
+                </div>
+                <div class="playlist-feedback" data-share-feedback="${safeId}" aria-live="polite"></div>
               </div>
             </section>
           `
@@ -519,21 +1084,52 @@
 
     function setActivePage() {
       const hash = window.location.hash.replace("#", "");
-      const nextPage = pages.find((page) => page.id === hash) ? hash : "home";
+      const requestedPage = pages.find((page) => page.id === hash) ? hash : "";
+      const nextPage = requestedPage || getStoredPlaylistPage() || "home";
+      const activePage = pages.find((page) => page.id === nextPage) || pages[0];
+
+      scrollToTopOnPageChange(nextPage);
 
       document.querySelectorAll(".page").forEach((pageEl) => {
         pageEl.classList.toggle("active", pageEl.dataset.page === nextPage);
       });
 
       document.querySelectorAll(".nav-btn").forEach((btn) => {
-        btn.classList.toggle("active", btn.dataset.link === nextPage);
+        const isActive = btn.dataset.link === nextPage;
+        btn.classList.toggle("active", isActive);
+
+        if (isActive) {
+          btn.setAttribute("aria-current", "page");
+        } else {
+          btn.removeAttribute("aria-current");
+        }
       });
+
+      if (playlistPageIds.has(nextPage)) {
+        rememberPlaylistPage(nextPage);
+      }
+
+      syncActivePlaylistPlayer(nextPage);
+      updateActiveSignal(activePage);
+      document.title = `${documentTitleBase} | ${activePage.navLabel}`;
+      currentPageId = nextPage;
     }
 
     render();
     setActivePage();
 
+    app.addEventListener("click", (event) => {
+      const shareButton = event.target.closest("[data-share-playlist]");
+      if (!shareButton) return;
+
+      event.preventDefault();
+      sharePlaylistPage(
+        shareButton.dataset.sharePlaylist || "",
+        shareButton.dataset.shareTitle || "Playlist"
+      );
+    });
+
     window.addEventListener("hashchange", setActivePage);
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a08ce8495c0ccba0',t:'MTc4MDk3NDI1MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
